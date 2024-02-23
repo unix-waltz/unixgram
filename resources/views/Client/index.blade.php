@@ -1,6 +1,6 @@
 @extends('Client.main')
 @section('content')
-<div class="sm:w-1/2 w-full mx-auto">
+<div class="sm:w-1/2  mx-auto">
     <div style=''>
         <div class="px-6 h-auto flex sm:block justify-center items-center" style="cursor: auto;">
           <custom-card3>

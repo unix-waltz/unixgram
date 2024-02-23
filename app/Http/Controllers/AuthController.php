@@ -33,7 +33,7 @@ class AuthController extends Controller
     if(Auth::attempt($valid)){
         $request->session()->regenerate();
      
-        return redirect()->intended('/auth');
+        return redirect()->intended('/');
     }       
     return back()->withErrors([
         'email' => 'The provided credentials do not match our records.',
@@ -52,6 +52,6 @@ class AuthController extends Controller
      
         $request->session()->regenerateToken();
      
-        return redirect('/');
+        return redirect('/login');
     }
 }

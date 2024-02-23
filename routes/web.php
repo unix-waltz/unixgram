@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,20 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/auth',function(){
-    return Auth()->user();
-})->middleware('auth');
-Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
-Route::get('/register', [AuthController::class, 'index'])->middleware('guest');
+Route::middleware(['auth'])->group(function(){
+Route::get('/logout', [AuthController::class, 'logout']);
+});
+ Route::get('/',[UserController::class,'index']);
+Route::middleware(['guest'])->group(function(){
+Route::get('/register', [AuthController::class, 'index']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::get('/login', [AuthController::class, 'LoginView'])->middleware('guest')->name('login');
+Route::get('/login', [AuthController::class, 'LoginView'])->name('login');
 Route::post('/login', [AuthController::class, 'Login']);
+});
+// users route  
+Route::middleware(['auth'])->group(function(){
+    Route::get('/myprofile/{username}',[UserController::class,'profile']);
+}); 
 
 Route::fallback(function(){
     return view('error.404');

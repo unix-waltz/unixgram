@@ -12,11 +12,12 @@
 <body>
     
 
-<nav class="border-b px-4 py-2 bg-white">
+<nav class="fixed w-full pb-1 border-b px-4 py-2 bg-white">
     <div class="flex flex-wrap items-center justify-between md:justify-around">
-      <!-- logo -->
-      <img class="h-10" src="{{asset('asset/Unixgram-2-20-2024.png')}}" alt="instagram">
-  
+ <a href="/">
+        <img class="h-10" src="{{asset('asset/Unixgram-2-20-2024.png')}}" alt="instagram">
+      </a>
+
       <!-- search-->
       <div class="relative hidden sm:block text-gray-700">
         <input class="search-bar max-w-xs h-1/2  rounded bg-gray-200 px-4
@@ -25,12 +26,54 @@
       </div>
   
       <div class="space-x-4">
+        @guest
         <a class="inline-block bg-blue-500 px-2 py-1 text-white font-semibold 
-                             text-sm rounded" href="#">Log In</a>
-        <a class="inline-block text-blue-500 font-semibold text-sm" href="#">Sign Up</a>
+        text-sm rounded" href="/login">Log In</a>
+        <a class="inline-block text-blue-500 font-semibold text-sm" href="/register">Sign Up</a>
+        @else
+        <div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
+            <button type="button" data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center font-medium justify-center pl-1 pr-11 py-0 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+             {{Auth()->user()->fullname}}&nbsp;&nbsp;&nbsp;
+             <img class="w-7 h-7 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="/docs/images/people/profile-picture-5.jpg" alt="Bordered avatar">
+                &nbsp;&nbsp;
+            </button>
+            <!-- Dropdown -->
+            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700" id="language-dropdown-menu">
+              <ul class="py-2 font-medium" role="none">
+               
+                <li>
+                  <a href="/myprofile/{{'@'.Auth()->user()->username}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                    <div class="inline-flex items-center">
+ Profile
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                    <div class="inline-flex items-center">
+Logout
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <button data-collapse-toggle="navbar-language" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-language" aria-expanded="false">
+              <span class="sr-only">Open main menu</span>
+             
+          </button>
+        </div>
+    
+        @endguest
       </div>
     </div>
   </nav>
+  <br><br>
+
+
+
+   
+
+
   
   @yield('content')
 
