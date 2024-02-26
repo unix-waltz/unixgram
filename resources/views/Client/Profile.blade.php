@@ -73,6 +73,7 @@
       <div class="md:hidden text-sm my-2">
         <h1 class="font-semibold">Mr Travlerrr...</h1>
         <span>Travel, Nature and Music</span>
+        
         <p>Lorem ipsum dolor sit amet consectetur</p>
       </div>
 
