@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use \Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     /**
@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('post', function (Blueprint $t) {
             $t->id();
+            $t->string('uuid')->unique();
             $t->string('location')->nullable();
             $t->string('image');
-            $t->string('description')->nullable();
+            $t->text('description')->nullable();
             $t->foreignId('albumid')->nullable()->constrained('albums')->onDelete('set null');
+            $t->foreignId('userid')->constrained('users')->onDelete('cascade');
             $t->timestamps();
         });
     }

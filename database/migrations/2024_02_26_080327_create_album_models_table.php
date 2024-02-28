@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('albums', function (Blueprint $t) {
             $t->id();
+            $t->foreignId('userid')->constrained('users')->onDelete('cascade');
             $t->string('album_name')->unique();
             $t->timestamps();
         });
