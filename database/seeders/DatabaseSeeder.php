@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use \App\Models\User as U;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,11 +12,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        U::create([
+            'username' => 'riosraskaa',
+            'fullname' => 'Putera Pratama',
+            'address' => 'Prancis belah kulon',
+            'email' => 'asdevubuntu@gmail.com',
+            'password' => bcrypt('asdevubuntu@gmail.com'),
+        ]);
+        U::create([
+            'username' => 'riokun',
+            'fullname' => 'Putera nurslemanjahaya',
+            'address' => 'Prancis belah wetan',
+            'email' => 'riokun@gmail.com',
+            'password' => bcrypt('riokun@gmail.com'),
+        ]);
     }
 }

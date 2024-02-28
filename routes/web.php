@@ -27,6 +27,10 @@ Route::post('/login', [AuthController::class, 'Login']);
 // users route  
 Route::middleware(['auth'])->group(function(){
     Route::get('/myprofile/{username}',[UserController::class,'profile']);
+    Route::get('/post/new',[UserController::class,'newpost']);
+    Route::post('/post/new',[UserController::class,'_newpost']);
+    Route::post('/album/new',[UserController::class,'_album']);
+
 }); 
 
 Route::fallback(function(){
