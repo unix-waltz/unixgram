@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\AlbumModel;
 use App\Models\PostModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -23,6 +24,10 @@ $page = 'true';
         return view('Client.Profile',[
             'data' => $data,
             'input' => $page,
+            'profile' => User::find(Auth()->user()->id),
+            'post' => PostModel::where('userid', Auth()->user()->id)->get()->count(),
+            'albums' => AlbumModel::where('userid', Auth()->user()->id)->get()->count(),
+            'likes' => 0,
         ]);
     }
     public function newpost(){
@@ -66,6 +71,9 @@ return view('Client.setting',[
 'profilephoto' => 'image|nullable',
         ]);
         if($r->file('profilephoto')){
+            if($r->oldimg){
+                Storage::delete($r->oldimg);
+            }
             $v['profilephoto'] = $r->file('profilephoto')->store('/profile');
         }
 User::find(Auth()->user()->id)->update($v);

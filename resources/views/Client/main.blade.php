@@ -34,7 +34,7 @@
         <div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
             <button type="button" data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center font-medium justify-center pl-1 pr-11 py-0 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
              {{Auth()->user()->fullname}}&nbsp;&nbsp;&nbsp;
-             <img class="w-7 h-7 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="/docs/images/people/profile-picture-5.jpg" alt="Bordered avatar">
+             <img class="w-7 h-7 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="{{asset( 'storage/'. Auth()->user()->profilephoto)}}" alt="Bordered avatar">
                 &nbsp;&nbsp;
             </button>
             <!-- Dropdown -->

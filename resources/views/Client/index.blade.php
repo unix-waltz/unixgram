@@ -10,7 +10,7 @@
             <div class="border sm:w-full bg-coolGray-900 text-coolGray-100">
               <div class="flex items-center justify-between p-3" style="cursor: auto;">
                 <div class="flex items-center space-x-2" style="cursor: auto;">
-                  <img src="https://stackdiary.com/140x100.png" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700" style="cursor: auto;">
+                  <img src="{{asset('storage/'.$d->postUsers->profilephoto)}}" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700" style="cursor: auto;">
                   <div class="-space-y-1" style="cursor: auto;">
                     <h2 class="text-sm font-semibold leading-none" style="cursor: auto;">{{$d->postUsers->username}}</h2>
                     <span class="inline-block text-xs leading-none text-coolGray-400" style="cursor: auto;">{{$d->location}}</span>

@@ -24,7 +24,7 @@
             @csrf
 {{-- <input type="hidden" name="uuid" value="{{bin2hex(Auth()->user()->username . mt_rand(1,10) . time())}}"> --}}
 
-            {{-- <input type="hidden" name='userid' value="{{Auth()->user()->id}}"> --}}
+            <input type="hidden" name='oldimg' value="{{Auth()->user()->profilephoto}}">
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                 <div class="sm:col-span-2">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>

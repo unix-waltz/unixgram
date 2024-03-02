@@ -61,53 +61,61 @@
       <div class="md:w-3/12 md:ml-16">
         <!-- profile image -->
         <img class="w-36 h-36 object-cover rounded-full
-                     border-2 border-pink-600 p-1" src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" alt="profile">
+                     border-2 border-pink-600 p-1"  
+                     @if (isset($profile->profilephoto))
+                     src="{{ asset('storage/' . $profile->profilephoto) }}"
+                     @else
+                     src="{{ asset('asset/no-image.jpg') }}"
+                   @endif
+                    alt="profile">
       </div>
 
       <!-- profile meta -->
       <div class="w-8/12 md:w-7/12 ml-4">
         <div class="md:flex md:flex-wrap md:items-center mb-4">
           <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
-            {{Auth()->user()->username}}
+            {{$profile->username}}
           </h2>
-
-          <a href="#" class="bg-blue-500 px-2 py-1 
-                        text-white font-semibold text-sm rounded  text-center 
-                        sm:inline-block block">Follow</a>
+{{-- @if ($profile->id == Auth()->user()->id)
+     <a href="#" class="bg-blue-500 px-2 py-1 
+                        text-white font-semibold text-sm rounded-full  text-center 
+                        sm:inline-block block">
+                        <i class="fa-solid fa-check"></i>
+                      </a>
+@endif --}}
+       
         </div>
 
         <!-- post, following, followers list for medium screens -->
-        <ul class="hidden md:flex space-x-8 mb-4">
+        <ul class="hidden md:flex space-x-8 mb-1">
           <li>
-            <span class="font-semibold">136</span>
+            <span class="font-semibold">{{$post}}</span>
             posts
           </li>
 
           <li>
-            <span class="font-semibold">40.5k</span>
-            followers
+            <span class="font-semibold">{{$albums}}</span>
+            Albums
           </li>
           <li>
-            <span class="font-semibold">302</span>
-            following
+            <span class="font-semibold">{{$likes}}</span>
+            Likes
           </li>
         </ul>
 
         <!-- user meta form medium screens -->
         <div class="hidden md:block">
-          <h1 class="font-semibold">Mr Travlerrr...</h1>
-          <span>Travel, Nature and Music</span>
-          <p>Lorem ipsum dolor sit amet consectetur</p>
+          <h1 class="font-semibold">{{$profile->email}}</h1>
+          <br>
+          <p>{{$profile->bio}}</p>
         </div>
 
       </div>
 
       <!-- user meta form small screens -->
       <div class="md:hidden text-sm my-2">
-        <h1 class="font-semibold">Mr Travlerrr...</h1>
-        <span>Travel, Nature and Music</span>
-        
-        <p>Lorem ipsum dolor sit amet consectetur</p>
+        <h1 class="font-semibold">{{$profile->email}}</h1>
+        <p>{{$profile->bio}}</p>
       </div>
 
     </header>
