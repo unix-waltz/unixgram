@@ -18,7 +18,6 @@
 }
 
 </style>
-
 <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
   <div class="relative p-4 w-full max-w-2xl max-h-full">
     <!-- Modal content -->
@@ -152,225 +151,106 @@
                     uppercase tracking-widest font-semibold text-xs text-gray-600
                     border-t">
         <!-- posts tab is active -->
-        <li class="md:border-t md:border-gray-700 md:-mt-px md:text-gray-700">
-          <a class="inline-block p-3" href="#">
+        <li class="{{$input == 'true' ? '' : 'md:border-t md:border-gray-700 md:-mt-px md:text-gray-700'}}">
+          <a class="inline-block p-3" href="?page=posts">
             <i class="fas fa-th-large text-xl md:text-xs"></i>
-            <span class="hidden md:inline">post</span>
+            <span class="hidden md:inline align-middle">post</span>
+          </a>
+        </li>
+        <li class="{{$input == 'true' ? 'md:border-t md:border-gray-700 md:-mt-px md:text-gray-700' : ''}}">
+          <a class="inline-block p-3" href="?page=albums">
+            <i class="fa-regular fa-images text-xl md:text-xs"></i>
+            
+            <span class="hidden md:inline align-middle">Albums</span>
           </a>
         </li>
         <li>
           <a class="inline-block p-3" href="#">
-            <i class="far fa-square text-xl md:text-xs"></i>
-            <span class="hidden md:inline">igtv</span>
+            <i class="fa-solid fa-plus px-1 pt-1 rounded text-xl md:text-xs"></i>
+            <button class="hidden md:inline align-middle" id="dropdownDefaultButton" type="button" data-dropdown-toggle="dropdown">NEW POST</button>
           </a>
         </li>
-        <li>
-          <a class="inline-block p-3" href="#">
-            <i class="fas fa-user border border-gray-500
-                             px-1 pt-1 rounded text-xl md:text-xs"></i>
-            <span class="hidden md:inline">tagged</span>
-          </a>
-        </li>
-        <li>
-          <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="border-solid border-2 border-gray-400 mx-auto focus:ring-4 focus:outline-none focus:ring-blue-300 font-sm rounded-lg text-sm px-3.5 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button"><i class="fa-solid fa-plus"></i>
-          </button>
-        </li>
+
       </ul>
       <!-- flexbox grid -->
       <div class="flex flex-wrap -mx-px md:-mx-3">
 
         <!-- column -->
+     
+        @if ($input == 'true')
+        @foreach ($data as $p )
+
         <div class="w-1/3 p-px md:px-3">
           <!-- post 1-->
           <a href="#">
             <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
               <!-- post image-->
-              <img class="w-full h-full absolute left-0 top-0 object-cover" src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image">
-
+              <img class="w-full h-full absolute left-0 top-0 object-cover" 
+              @if (isset($p->albumPosts->first()->image))
+                src="{{ asset('storage/' . $p->albumPosts->first()->image) }}"
+                @else
+                src="{{ asset('asset/no-image.jpg') }}"
+              @endif
+              
+               alt="image">
+              
               <i class="fas fa-square absolute right-0 top-0 m-1"></i>
               <!-- overlay-->
               <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute 
-                                left-0 top-0 hidden">
-                <div class="flex justify-center items-center 
-                                    space-x-4 h-full">
-                  <span class="p-2">
-                    <i class="fas fa-heart"></i>
-                    412K
-                  </span>
-
-                  <span class="p-2">
-                    <i class="fas fa-comment"></i>
-                    2,909
-                  </span>
-                </div>
-              </div>
-
-            </article>
-          </a>
-        </div>
-        <div class="w-1/3 p-px md:px-3">
-          <!-- post 1-->
-          <a href="#">
-            <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
-              <!-- post image-->
-              <img class="w-full h-full absolute left-0 top-0 object-cover" src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image">
-
-              <i class="fas fa-square absolute right-0 top-0 m-1"></i>
-              <!-- overlay-->
-              <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute 
-                                left-0 top-0 hidden">
-                <div class="flex justify-center items-center 
-                                    space-x-4 h-full">
-                  <span class="p-2">
-                    <i class="fas fa-heart"></i>
-                    412K
-                  </span>
-
-                  <span class="p-2">
-                    <i class="fas fa-comment"></i>
-                    2,909
-                  </span>
-                </div>
-              </div>
-
-            </article>
-          </a>
-        </div>
-        <div class="w-1/3 p-px md:px-3">
-          <!-- post 1-->
-          <a href="#">
-            <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
-              <!-- post image-->
-              <img class="w-full h-full absolute left-0 top-0 object-cover" src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image">
-
-              <i class="fas fa-square absolute right-0 top-0 m-1"></i>
-              <!-- overlay-->
-              <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute 
-                                left-0 top-0 hidden">
-                <div class="flex justify-center items-center 
-                                    space-x-4 h-full">
-                  <span class="p-2">
-                    <i class="fas fa-heart"></i>
-                    412K
-                  </span>
-
-                  <span class="p-2">
-                    <i class="fas fa-comment"></i>
-                    2,909
-                  </span>
-                </div>
-              </div>
-
-            </article>
-          </a>
-        </div>
-
-        <div class="w-1/3 p-px md:px-3">
-          <a href="#">
-            <!-- post 2 -->
-            <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
-              <img class="w-full h-full absolute left-0 top-0 object-cover" src="https://images.unsplash.com/photo-1498409570040-05bf6d3dd5b5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image">
-
-              <!-- overlay-->
-              <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute 
-                                left-0 top-0 hidden">
-                <div class="flex justify-center items-center 
-                                    space-x-4 h-full">
-                  <span class="p-2">
-                    <i class="fas fa-heart"></i>
-                    412K
-                  </span>
-
-                  <span class="p-2">
-                    <i class="fas fa-comment"></i>
-                    1,993
-                  </span>
-                </div>
-              </div>
-
-            </article>
-          </a>
-        </div>
-
-        <div class="w-1/3 p-px md:px-3">
-          <a href="#">
-            <article class="post bg-gray-100 text-white relative pb-full  md:mb-6">
-              <img class="w-full h-full absolute left-0 top-0 object-cover" src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image">
-              <!-- overlay-->
-              <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute 
-                                left-0 top-0 hidden">
-                <div class="flex justify-center items-center 
-                                    space-x-4 h-full">
-                  <span class="p-2">
-                    <i class="fas fa-heart"></i>
-                    112K
-                  </span>
-
-                  <span class="p-2">
-                    <i class="fas fa-comment"></i>
-                    2,090
-                  </span>
-                </div>
-              </div>
-            </article>
-          </a>
-        </div>
-
-        <div class="w-1/3 p-px md:px-3">
-          <a href="#">
-            <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
-              <img class="w-full h-full absolute left-0 top-0 object-cover" src="https://images.unsplash.com/photo-1533105079780-92b9be482077?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="image">
-
-              <i class="fas fa-video absolute right-0 top-0 m-1"></i>
-
-              <!-- overlay-->
-              <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute 
-                                left-0 top-0 hidden">
-                <div class="flex justify-center items-center 
-                                    space-x-4 h-full">
-                  <span class="p-2">
-                    <i class="fas fa-heart"></i>
-                    841K
-                  </span>
-
-                  <span class="p-2">
-                    <i class="fas fa-comment"></i>
-                    909
-                  </span>
-                </div>
-              </div>
-
-            </article>
-          </a>
-        </div>
-
-        <div class="w-1/3 p-px md:px-3">
-          <a href="#">
-            <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
-              <img class="w-full h-full absolute left-0 top-0 object-cover" src="https://images.unsplash.com/photo-1475688621402-4257c812d6db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80" alt="image">
-              <!-- overlay-->
-              <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute 
-                                left-0 top-0 hidden">
-                <div class="flex justify-center items-center 
-                                    space-x-4 h-full">
-                  <span class="p-2">
-                    <i class="fas fa-heart"></i>
-                    120K
-                  </span>
-
-                  <span class="p-2">
-                    <i class="fas fa-comment"></i>
-                    3,909
-                  </span>
-                </div>
-              </div>
-
-            </article>
-          </a>
-        </div>
-
-      </div>
+              left-0 top-0 hidden">
+              <div class="flex justify-center items-center 
+              space-x-4 h-full">
+              <span class="p-2">
+                <i class="fa-regular fa-folder-open"></i>
+                {{$p->album_name}}
+              </span>
+              <span class="p-2">
+                <i class="fa-regular fa-images"></i>
+                {{$p->albumPosts->count()}}
+              </span>
+            </div>
+          </div>
+          
+        </article>
+      </a>
+     
     </div>
+    @endforeach
+        @else
+        @foreach ($data as $p )
+        <div class="w-1/3 p-px md:px-3">
+          <!-- post 1-->
+          <a href="#">
+            <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
+              <!-- post image-->
+              <img class="w-full h-full absolute left-0 top-0 object-cover" src="{{ asset('storage/' . $p->image) }}" alt="image">
+              
+              <i class="fas fa-square absolute right-0 top-0 m-1"></i>
+              <!-- overlay-->
+              <div class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute 
+              left-0 top-0 hidden">
+              <div class="flex justify-center items-center 
+              space-x-4 h-full">
+              <span class="p-2">
+                <i class="fas fa-heart"></i>
+                0
+              </span>
+              
+              <span class="p-2">
+                <i class="fas fa-comment"></i>
+                0
+              </span>
+            </div>
+          </div>
+          
+        </article>
+      </a>
+    </div>
+    @endforeach
+    @endif
+    
   </div>
+</div>
+</div>
 </main>
-  @endsection
+@endsection

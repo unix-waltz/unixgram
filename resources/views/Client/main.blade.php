@@ -12,7 +12,7 @@
 <body>
     
 
-<nav class="fixed w-full pb-1 border-b px-4 py-2 bg-white">
+<nav class="fixed w-full pb-1 border-b px-4 py-2 bg-white z-50">
     <div class="flex flex-wrap items-center justify-between md:justify-around">
  <a href="/">
         <img class="h-10" src="{{asset('asset/Unixgram-2-20-2024.png')}}" alt="instagram">
@@ -42,14 +42,21 @@
               <ul class="py-2 font-medium" role="none">
                
                 <li>
-                  <a href="/myprofile/{{'@'.Auth()->user()->username}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                  <a href="/myprofile/{{'@'.Auth()->user()->username}}" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
                     <div class="inline-flex items-center">
  Profile
                     </div>
                   </a>
                 </li>
                 <li>
-                  <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                  <a href="/profile/setting" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                    <div class="inline-flex items-center">
+Setting
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="/logout" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
                     <div class="inline-flex items-center">
 Logout
                     </div>

@@ -30,7 +30,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/post/new',[UserController::class,'newpost']);
     Route::post('/post/new',[UserController::class,'_newpost']);
     Route::post('/album/new',[UserController::class,'_album']);
-
+    Route::get('/profile/setting',[UserController::class,'setting']);
+    Route::post('/profile/setting',[UserController::class,'_setting']);
 }); 
 
 Route::fallback(function(){

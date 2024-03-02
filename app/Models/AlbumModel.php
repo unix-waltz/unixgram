@@ -10,4 +10,7 @@ class AlbumModel extends Model
     use HasFactory;
     protected $table = 'albums';
     protected $guarded = ['id'];
+    public function albumPosts(){
+        return $this->hasMany(PostModel::class,'albumid','id');
+    }
 }

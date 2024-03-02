@@ -1,17 +1,18 @@
 @extends('Client.main')
 @section('content')
 <div class="sm:w-1/2  mx-auto">
+  
   @foreach ($data->reverse() as $d )
     
-  <div style=''>
-    <div class="px-6 h-auto flex sm:block justify-center items-center" style="cursor: auto;">
+  <div style='' id="{{$d->uuid}}">
+    <div class="px-6 h-auto  sm:block justify-center items-center" style="cursor: auto;">
           <custom-card3>
             <div class="border sm:w-full bg-coolGray-900 text-coolGray-100">
               <div class="flex items-center justify-between p-3" style="cursor: auto;">
                 <div class="flex items-center space-x-2" style="cursor: auto;">
                   <img src="https://stackdiary.com/140x100.png" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700" style="cursor: auto;">
                   <div class="-space-y-1" style="cursor: auto;">
-                    <h2 class="text-sm font-semibold leading-none" style="cursor: auto;">External_</h2>
+                    <h2 class="text-sm font-semibold leading-none" style="cursor: auto;">{{$d->postUsers->username}}</h2>
                     <span class="inline-block text-xs leading-none text-coolGray-400" style="cursor: auto;">{{$d->location}}</span>
                   </div>
                 </div>
@@ -62,7 +63,7 @@
                 </div>
                 <div class="space-y-3" style="cursor: auto;">
                   <p class="text-sm" style="cursor: auto;">
-                    <span class="text-base font-semibold">External_</span> {{$d->description}}
+                    <span class="text-base font-semibold">{{$d->postUsers->username}}</span> {{$d->description}}
                   </p>
                   <input type="text" placeholder="Add a comment..." class="w-full py-0.5 bg-transparent border-none rounded text-sm pl-0 text-coolGray-100" style="cursor: auto;">
                 </div>

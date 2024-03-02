@@ -15,14 +15,14 @@ class DatabaseSeeder extends Seeder
         U::create([
             'username' => 'riosraskaa',
             'fullname' => 'Putera Pratama',
-            'address' => 'Prancis belah kulon',
+            'bio' => 'Prancis belah kulon',
             'email' => 'asdevubuntu@gmail.com',
             'password' => bcrypt('asdevubuntu@gmail.com'),
         ]);
         U::create([
             'username' => 'riokun',
             'fullname' => 'Putera nurslemanjahaya',
-            'address' => 'Prancis belah wetan',
+            'bio' => 'Prancis belah wetan',
             'email' => 'riokun@gmail.com',
             'password' => bcrypt('riokun@gmail.com'),
         ]);
