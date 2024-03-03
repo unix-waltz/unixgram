@@ -1,6 +1,5 @@
--search ~ pagination & filter
--detail post
 -post edit
+-search ~ pagination & filter
 -card general :{
 -like and save post
 -comment & reply post

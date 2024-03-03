@@ -4,6 +4,23 @@
   
   @foreach ($data->reverse() as $d )
     
+  <div id="dropdown{{$d->id}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton{{$d->id}}">
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Save Post</a>
+      </li>
+      @if ($d->postUsers->id == Auth()->user()->id)
+        
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete </a>
+      </li>
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+      </li>
+      @endif
+    </ul>
+</div>
+
   <div style='' id="{{$d->uuid}}">
     <div class="px-6 h-auto  sm:block justify-center items-center" style="cursor: auto;">
           <custom-card3>
@@ -16,7 +33,7 @@
                     <span class="inline-block text-xs leading-none text-coolGray-400" style="cursor: auto;">{{$d->location}}</span>
                   </div>
                 </div>
-                <button title="Open options" type="button">
+                <button title="Open options" type="button" id="dropdownDefaultButton{{$d->id}}" data-dropdown-toggle="dropdown{{$d->id}}">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"class="w-5 h-5 fill-current" style="cursor: pointer;">
                     <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
                   </svg>

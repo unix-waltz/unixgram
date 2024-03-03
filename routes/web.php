@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/profile/setting',[UserController::class,'_setting']);
     Route::get('/posts/details/{username:username}',[UserController::class,'detailposts']);
     Route::get('/post/detail/{uuid:uuid}',[UserController::class,'_detailposts']);
+    Route::get('/album/details/{id:id}',[UserController::class,'detailalbum']);
 }); 
 
 Route::fallback(function(){

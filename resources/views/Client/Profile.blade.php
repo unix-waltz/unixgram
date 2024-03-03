@@ -196,7 +196,7 @@
 
         <div class="w-1/3 p-px md:px-3">
           <!-- post 1-->
-          <a href="">
+          <a href="/album/details/{{$p->id}}">
             <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
               <!-- post image-->
               <img class="w-full h-full absolute left-0 top-0 object-cover" 
