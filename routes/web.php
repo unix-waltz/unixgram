@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/other/{username:username}',[UserController::class,'otherprofile']);
 Route::middleware(['auth'])->group(function(){
 Route::get('/logout', [AuthController::class, 'logout']);
 });
@@ -32,6 +33,8 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/album/new',[UserController::class,'_album']);
     Route::get('/profile/setting',[UserController::class,'setting']);
     Route::post('/profile/setting',[UserController::class,'_setting']);
+    Route::get('/posts/details/{username:username}',[UserController::class,'detailposts']);
+    Route::get('/post/detail/{uuid:uuid}',[UserController::class,'_detailposts']);
 }); 
 
 Route::fallback(function(){

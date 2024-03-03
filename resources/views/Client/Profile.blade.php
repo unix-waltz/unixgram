@@ -121,18 +121,22 @@
     </header>
 
       <!-- Dropdown menu -->
-      <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-            <li>
-              <a href="/post/new" class="text-center block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">New Post</a>
-            </li>
-            <li>
-     
-              <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" type="button">New Albums</button>
-              
-            </li>
-          </ul>
-      </div>
+@if ($profile->id == Auth()->user()->id)
+  
+<div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+            
+    <li>
+      <a href="/post/new" class="text-center block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">New Post</a>
+    </li>
+    <li>
+      
+      <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" type="button">New Albums</button>
+      
+    </li>
+  </ul>
+</div>
+@endif
     <!-- posts -->
     <div class="px-px md:px-3">
 
@@ -172,13 +176,15 @@
             <span class="hidden md:inline align-middle">Albums</span>
           </a>
         </li>
+@if ($profile->id == Auth()->user()->id)
+
         <li>
           <a class="inline-block p-3" href="#">
             <i class="fa-solid fa-plus px-1 pt-1 rounded text-xl md:text-xs"></i>
             <button class="hidden md:inline align-middle" id="dropdownDefaultButton" type="button" data-dropdown-toggle="dropdown">NEW POST</button>
           </a>
         </li>
-
+@endif
       </ul>
       <!-- flexbox grid -->
       <div class="flex flex-wrap -mx-px md:-mx-3">
@@ -190,7 +196,7 @@
 
         <div class="w-1/3 p-px md:px-3">
           <!-- post 1-->
-          <a href="#">
+          <a href="">
             <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
               <!-- post image-->
               <img class="w-full h-full absolute left-0 top-0 object-cover" 
@@ -228,7 +234,7 @@
         @foreach ($data as $p )
         <div class="w-1/3 p-px md:px-3">
           <!-- post 1-->
-          <a href="#">
+          <a href="/post/detail/{{$p->uuid}}">
             <article class="post bg-gray-100 text-white relative pb-full md:mb-6">
               <!-- post image-->
               <img class="w-full h-full absolute left-0 top-0 object-cover" src="{{ asset('storage/' . $p->image) }}" alt="image">

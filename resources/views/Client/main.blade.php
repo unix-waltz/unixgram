@@ -19,11 +19,11 @@
       </a>
 
       <!-- search-->
-      <div class="relative hidden sm:block text-gray-700">
+      <form class="relative hidden sm:block text-gray-700">
         <input class="search-bar max-w-xs h-1/2  rounded bg-gray-200 px-4
               text-center outline-none " type="search" placeholder="Search">
         
-      </div>
+      </form>
   
       <div class="space-x-4">
         @guest

@@ -32,7 +32,7 @@ $page = 'true';
     }
     public function newpost(){
 return view('Client.newpost',[
-    'albums' => AlbumModel::all(),
+    'albums' => AlbumModel::where('userid', Auth()->user()->id)->get(),
 ]);
     }
     public function _newpost(Request $r){
@@ -80,4 +80,29 @@ User::find(Auth()->user()->id)->update($v);
 
 return redirect('/myprofile/@'.Auth()->user()->username.'?page=posts');
     }
+    public function otherprofile(User $username, Request $r){
+        $data = PostModel::where('userid', $username->id)->get();
+        $page = $r->input('page');
+     if(isset($page) && $page == 'albums'){
+ $data = AlbumModel::where('userid', $username->id)->get();
+ $page = 'true';
+         }
+         return view('Client.Profile',[
+             'data' => $data,
+             'input' => $page,
+             'profile' => User::find($username->id),
+             'post' => PostModel::where('userid', $username->id)->get()->count(),
+             'albums' => AlbumModel::where('userid', $username->id)->get()->count(),
+             'likes' => 0,
+         ]);
+    }
+    public function detailposts(User $username){
+        return view('Client.detail',[
+            'data' => PostModel::where('userid', $username->id)->get(),
+        ]);
+    }
+    public function _detailposts(PostModel $uuid){
+         return  redirect('/posts/details/'. $uuid->postUsers->username.'#'.$uuid->uuid);
+    }
 }
+

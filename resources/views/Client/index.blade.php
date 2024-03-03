@@ -12,7 +12,7 @@
                 <div class="flex items-center space-x-2" style="cursor: auto;">
                   <img src="{{asset('storage/'.$d->postUsers->profilephoto)}}" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700" style="cursor: auto;">
                   <div class="-space-y-1" style="cursor: auto;">
-                    <h2 class="text-sm font-semibold leading-none" style="cursor: auto;">{{$d->postUsers->username}}</h2>
+                    <a href="/other/{{$d->postUsers->username}}" class="block text-sm font-semibold leading-none" style="cursor: pointer;">{{$d->postUsers->username}}</a>
                     <span class="inline-block text-xs leading-none text-coolGray-400" style="cursor: auto;">{{$d->location}}</span>
                   </div>
                 </div>
