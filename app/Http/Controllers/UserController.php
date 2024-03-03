@@ -101,9 +101,10 @@ return redirect('/myprofile/@'.Auth()->user()->username.'?page=posts');
             'data' => PostModel::where('userid', $username->id)->get(),
         ]);
     }
-    public function detailalbum(User $id){
-        return view('Client.detail',[
+    public function detailalbum(AlbumModel $id){
+        return view('Client.detailalbum',[
             'data' => PostModel::where('albumid', $id->id)->get(),
+            'album' => $id->album_name
         ]);
     }
     public function _detailposts(PostModel $uuid){
