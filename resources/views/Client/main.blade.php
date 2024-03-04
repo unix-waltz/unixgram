@@ -20,9 +20,11 @@
       </a>
 
       <!-- search-->
-      <form class="relative hidden sm:block text-gray-700">
+      <form  action="/_search" class="relative hidden sm:block text-gray-700">
+        @csrf
+        @method('GET')
         <input class="search-bar max-w-xs h-1/2  rounded bg-gray-200 px-4
-              text-center outline-none " type="search" placeholder="Search">
+              text-center outline-none " name="search" type="search" placeholder="Search">
         
       </form>
   
@@ -33,31 +35,31 @@
         <a class="inline-block text-blue-500 font-semibold text-sm" href="/register">Sign Up</a>
         @else
         <div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
-            <button type="button" data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center font-medium justify-center pl-1 pr-11 py-0 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+            <button type="button" data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center font-medium justify-center pl-1 pr-11 py-0 text-sm text-gray-900  rounded-lg cursor-pointer hover:bg-gray-100">
              {{Auth()->user()->fullname}}&nbsp;&nbsp;&nbsp;
-             <img class="w-7 h-7 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="{{asset( 'storage/'. Auth()->user()->profilephoto)}}" alt="Bordered avatar">
+             <img class="w-7 h-7 p-1 rounded-full ring-2 ring-gray-300 " src="{{asset( 'storage/'. Auth()->user()->profilephoto)}}" alt="Bordered avatar">
                 &nbsp;&nbsp;
             </button>
             <!-- Dropdown -->
-            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700" id="language-dropdown-menu">
+            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg " id="language-dropdown-menu">
               <ul class="py-2 font-medium" role="none">
                
                 <li>
-                  <a href="/myprofile/{{'@'.Auth()->user()->username}}" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                  <a href="/myprofile/{{'@'.Auth()->user()->username}}" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100 " role="menuitem">
                     <div class="inline-flex items-center">
  Profile
                     </div>
                   </a>
                 </li>
                 <li>
-                  <a href="/profile/setting" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                  <a href="/profile/setting" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                     <div class="inline-flex items-center">
 Setting
                     </div>
                   </a>
                 </li>
                 <li>
-                  <a href="/logout" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                  <a href="/logout" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100 " role="menuitem">
                     <div class="inline-flex items-center">
 Logout
                     </div>
@@ -65,7 +67,7 @@ Logout
                 </li>
               </ul>
             </div>
-            <button data-collapse-toggle="navbar-language" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-language" aria-expanded="false">
+            <button data-collapse-toggle="navbar-language" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-language" aria-expanded="false">
               <span class="sr-only">Open main menu</span>
              
           </button>
@@ -89,7 +91,7 @@ Logout
 <footer class="bg-white rounded-lg shadow  m-4">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div class="sm:flex sm:items-center sm:justify-between">
-            <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+            <a href="https://unix-waltz.github.io/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
                 <img src="{{asset('asset/Unixgram-2-20-2024.png')}}" class="h-12" alt="Flowbite Logo" />
                 <span class="self-center font-medium text-xl text-gray-500 whitespace-nowrap">By Unix-waltz</span>
             </a>

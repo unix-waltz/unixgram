@@ -110,5 +110,30 @@ return redirect('/myprofile/@'.Auth()->user()->username.'?page=posts');
     public function _detailposts(PostModel $uuid){
          return  redirect('/posts/details/'. $uuid->postUsers->username.'#'.$uuid->uuid);
     }
+    public function search(Request $r){
+$users = User::all();
+$posts = PostModel::all();
+$albums = AlbumModel::all();
+$i = $r->input('s');
+if(isset($i)){
+    $posts = PostModel::where('location', 'like', "%$i%")
+    ->orWhere('description', 'like', "%$i%")
+    ->get();
+    $users = User::where('username', 'like', "%$i%")
+    ->orWhere('fullname', 'like', "%$i%")
+    ->orWhere('email', 'like', "%$i%")
+    ->get();
+    $albums = AlbumModel::where('album_name', 'like', "%$i%")->get();
+}
+        return view('Client.search',[
+            'users' => $users,
+            'posts' => $posts,
+            'albums' => $albums,
+        ]);
+    }
+
+    public function _search(Request $r){
+        return redirect('/search?s='.$r->search);
+    }
 }
 

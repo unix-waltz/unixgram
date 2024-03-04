@@ -2,20 +2,22 @@
 @section('content')
 <div class="sm:w-1/2  mx-auto">
   @foreach ($data as $d )
-  <div id="dropdown{{$d->id}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton{{$d->id}}">
+  <div id="dropdown{{$d->id}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
+    <ul class="py-2 text-sm text-gray-700 " aria-labelledby="dropdownDefaultButton{{$d->id}}">
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Save Post</a>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Save Post</a>
       </li>
+      @auth
       @if ($d->postUsers->id == Auth()->user()->id)
         
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete </a>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Delete </a>
       </li>
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Edit</a>
       </li>
       @endif
+      @endauth
     </ul>
 </div>  
 

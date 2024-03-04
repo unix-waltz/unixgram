@@ -36,6 +36,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/posts/details/{username:username}',[UserController::class,'detailposts']);
     Route::get('/post/detail/{uuid:uuid}',[UserController::class,'_detailposts']);
     Route::get('/album/details/{id:id}',[UserController::class,'detailalbum']);
+Route::get('/search',[UserController::class,'search']);
+Route::get('/_search',[UserController::class,'_search']);
+
 }); 
 
 Route::fallback(function(){
