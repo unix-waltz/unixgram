@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\LikeModel;
 use App\Models\User;
 use App\Models\AlbumModel;
 use App\Models\PostModel;
@@ -114,6 +115,7 @@ return redirect('/myprofile/@'.Auth()->user()->username.'?page=posts');
 $users = User::all();
 $posts = PostModel::all();
 $albums = AlbumModel::all();
+$in = null;
 $i = $r->input('s');
 if(isset($i)){
     $posts = PostModel::where('location', 'like', "%$i%")
@@ -124,14 +126,30 @@ if(isset($i)){
     ->orWhere('email', 'like', "%$i%")
     ->get();
     $albums = AlbumModel::where('album_name', 'like', "%$i%")->get();
+    $in = $i;
 }
         return view('Client.search',[
             'users' => $users,
             'posts' => $posts,
             'albums' => $albums,
+            'i' => $in
         ]);
     }
+public function _like(Request $r){
+$r = $r->validate([
+    'userid' => 'required',
+    'postid' => 'required'
+]);
+LikeModel::create($r);
+return redirect()->back();
+}
+public function _unlike(Request $r){
 
+    $model = LikeModel::where('userid', $r->userid)
+    ->where('postid', $r->postid);
+$model->delete();
+    return redirect()->back();
+    }
     public function _search(Request $r){
         return redirect('/search?s='.$r->search);
     }

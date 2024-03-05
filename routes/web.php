@@ -38,7 +38,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/album/details/{id:id}',[UserController::class,'detailalbum']);
 Route::get('/search',[UserController::class,'search']);
 Route::get('/_search',[UserController::class,'_search']);
-
+Route::post('/like',[UserController::class,'_like']);
+Route::post('/unlike',[UserController::class,'_unlike']);
 }); 
 
 Route::fallback(function(){

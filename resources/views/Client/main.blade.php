@@ -24,7 +24,12 @@
         @csrf
         @method('GET')
         <input class="search-bar max-w-xs h-1/2  rounded bg-gray-200 px-4
-              text-center outline-none " name="search" type="search" placeholder="Search">
+              text-center outline-none " name="search" type="search" 
+               @if (isset($i))
+               value="{{$i}}"  
+@else
+placeholder="search"
+            @endif>
         
       </form>
   
