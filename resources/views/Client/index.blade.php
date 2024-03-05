@@ -118,19 +118,26 @@
                 <div class="flex flex-wrap items-center pt-3 pb-1" style="cursor: auto;">
                   <div class="flex items-center space-x-2">
                     <div class="flex -space-x-1">
-                      <img alt="" class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800" src="https://stackdiary.com/140x100.png">
-                      <img alt="" class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800" src="https://stackdiary.com/140x100.png">
-                      <img alt="" class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800" src="https://stackdiary.com/140x100.png"><!---->
+                      @for ($x = 0; $x < min(3, count($d->postLikes)); $x++)
+                      @php
+                          $like = $d->postLikes[$x];
+                      @endphp
+                      <img alt="" class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800" src="{{asset('storage/'.$like->likeUser->profilephoto)}}">
+                  @endfor
+                  
                     </div>
+@if (count($d->postLikes) > 0)
+  
                     <span class="text-sm"> Liked by 
-                      <span class="font-semibold">Pixels</span> and 
-                      <span class="font-semibold">20 others</span>
+                      <span class="font-semibold">{{$d->postLikes->first()->likeUser->username}}</span> and 
+                      <span class="font-semibold"> {{$d->postLikes->count()}} others</span>
                     </span>
+                    @endif
                   </div>
                 </div>
                 <div class="space-y-3" style="cursor: auto;">
                   <p class="text-sm" style="cursor: auto;">
-                    <span class="text-base font-semibold">{{$d->postUsers->username}}</span> {{$d->description}}
+                    <span class="text-sm font-semibold">{{$d->postUsers->username}}</span> {{$d->description}}
                   </p>
                   <input type="text" placeholder="Add a comment..." class="w-full py-0.5 bg-transparent border-none rounded text-sm pl-0 text-coolGray-100" style="cursor: auto;">
                 </div>

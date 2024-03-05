@@ -44,9 +44,56 @@
                 <div class="flex items-center justify-between" style="cursor: auto;">
                   <div class="flex items-center space-x-3">
                     <button type="button" title="Like post" class="flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
-                        <path d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z"></path>
-                      </svg>
+                      @if (isset($d->postLikes))
+                      @php
+                          $userLiked = false;
+                      @endphp
+                  
+                      @foreach ($d->postLikes as $like)
+                          @if ($like->userid == auth()->user()->id)
+                              @php
+                                  $userLiked = true;
+                              @endphp
+                              <form action="/unlike" method="post">
+                                  @csrf
+                                  @method('POST')
+                                  <input type="hidden" name="userid" value="{{ auth()->user()->id }}">
+                                  <input type="hidden" name="postid" value="{{ $d->id }}">
+                                  <button type="submit">
+                                      <i class="fa-solid fa-heart fa-lg" style="color: #ff0000;"></i>
+                                  </button>
+                              </form>
+                              @break
+                          @endif
+                      @endforeach
+                  
+                      @unless($userLiked)
+                          <form action="/like" method="post">
+                              @csrf
+                              @method('POST')
+                              <input type="hidden" name="userid" value="{{ auth()->user()->id }}">
+                              <input type="hidden" name="postid" value="{{ $d->id }}">
+                              <button type="submit" title="Like post" class="flex items-center justify-center">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
+                                      <path d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z"></path>
+                                  </svg>
+                              </button>
+                          </form>
+                      @endunless
+                  @else
+                      <form action="/like" method="post">
+                          @csrf
+                          @method('POST')
+                          <input type="hidden" name="userid" value="{{ auth()->user()->id }}">
+                          <input type="hidden" name="postid" value="{{ $d->id }}">
+                          <button type="submit" title="Like post" class="flex items-center justify-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
+                                  <path d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z"></path>
+                              </svg>
+                          </button>
+                      </form>
+                  @endif
+                  
                     </button>
                     <button type="button" title="Add a comment" class="flex items-center justify-center">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
@@ -68,14 +115,21 @@
                 <div class="flex flex-wrap items-center pt-3 pb-1" style="cursor: auto;">
                   <div class="flex items-center space-x-2">
                     <div class="flex -space-x-1">
-                      <img alt="" class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800" src="https://stackdiary.com/140x100.png">
-                      <img alt="" class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800" src="https://stackdiary.com/140x100.png">
-                      <img alt="" class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800" src="https://stackdiary.com/140x100.png"><!---->
+                      @for ($x = 0; $x < min(3, count($d->postLikes)); $x++)
+                      @php
+                          $like = $d->postLikes[$x];
+                      @endphp
+                      <img alt="" class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800" src="{{asset('storage/'.$like->likeUser->profilephoto)}}">
+                  @endfor
+                  
                     </div>
+@if (count($d->postLikes) > 0)
+  
                     <span class="text-sm"> Liked by 
-                      <span class="font-semibold">Pixels</span> and 
-                      <span class="font-semibold">20 others</span>
+                      <span class="font-semibold">{{$d->postLikes->first()->likeUser->username}}</span> and 
+                      <span class="font-semibold"> {{$d->postLikes->count()}} others</span>
                     </span>
+                    @endif
                   </div>
                 </div>
                 <div class="space-y-3" style="cursor: auto;">
