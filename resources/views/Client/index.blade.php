@@ -14,7 +14,8 @@
       @if ($d->postUsers->id == Auth()->user()->id)
       
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Delete </a>
+        <a href="/delete/{{$d->uuid}}" class="block px-4 py-2 hover:bg-gray-100 ">Delete </a>
+
       </li>
       <li>
         <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Edit</a>

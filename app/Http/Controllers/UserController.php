@@ -173,5 +173,9 @@ $model->delete();
             'data' => SavedModel::where('userid',(int)Auth()->user()->id)->get(),
         ]);
     }
+    public function _delete(PostModel $uuid){
+$uuid->delete();
+return back();
+    }
 }
 
