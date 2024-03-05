@@ -174,6 +174,7 @@ $model->delete();
         ]);
     }
     public function _delete(PostModel $uuid){
+        Storage::delete($uuid->image);
 $uuid->delete();
 return back();
     }

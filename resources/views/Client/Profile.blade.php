@@ -74,13 +74,12 @@
 
       <!-- profile meta -->
       <div class="w-8/12 md:w-7/12 ml-4">
-        <div class="md:flex md:flex-wrap md:items-center mb-4">
-          <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
+        <div class="md:flex mt-4 md:mt-0 md:flex-wrap md:items-center mb-4">
+          <h2 class="text-3xl inline-block font-light md:mr-2 sm:mb-2 mb-0">
             {{$profile->username}}
           </h2>
 
         </div>
-
         <!-- post, following, followers list for medium screens -->
         <ul class="hidden md:flex space-x-8 mb-1">
           <li>
@@ -110,18 +109,12 @@
         </ul>
 
         <!-- user meta form medium screens -->
-        <div class="hidden md:block">
+        <div class="block md:hidden">
           <h1 class="font-semibold">{{$profile->email}}</h1>
           <br>
           <p>{{$profile->bio}}</p>
         </div>
 
-      </div>
-
-      <!-- user meta form small screens -->
-      <div class="md:hidden text-sm my-2">
-        <h1 class="font-semibold">{{$profile->email}}</h1>
-        <p>{{$profile->bio}}</p>
       </div>
 
     </header>
@@ -152,17 +145,27 @@
       <ul class="flex md:hidden justify-around space-x-8 border-t 
                 text-center p-2 text-gray-600 leading-snug text-sm">
         <li>
-          <span class="font-semibold text-gray-800 block">136</span>
+          <span class="font-semibold text-gray-800 block">{{$post->count()}}</span>
           posts
         </li>
 
         <li>
-          <span class="font-semibold text-gray-800 block">40.5k</span>
-          followers
+          <span class="font-semibold text-gray-800 block">{{$albums}}</span>
+          albums
         </li>
         <li>
-          <span class="font-semibold text-gray-800 block">302</span>
-          following
+          <span class="font-semibold text-gray-800 block">  @php
+            $totalLikes = 0;
+        @endphp
+        
+        @foreach ($post as $p)
+            @php
+                $totalLikes += $p->postLikes->count();
+            @endphp
+        @endforeach
+        {{$totalLikes}}</span>
+          
+          Like
         </li>
       </ul>
 
@@ -188,10 +191,10 @@
 @if ($profile->id == Auth()->user()->id)
 
         <li>
-          <a class="inline-block p-3" href="#">
+          <span class="inline-block p-3" id="dropdownDefaultButton" type="button" data-dropdown-toggle="dropdown">
             <i class="fa-solid fa-plus px-1 pt-1 rounded text-xl md:text-xs"></i>
-            <button class="hidden md:inline align-middle" id="dropdownDefaultButton" type="button" data-dropdown-toggle="dropdown">NEW POST</button>
-          </a>
+            <button class="hidden md:inline align-middle" >NEW POST</button>
+          </span>
         </li>
 @endif
 @endauth
