@@ -1,6 +1,5 @@
 @extends('Client.main')
 @section('content')
-<!-- nav -->
 <style>
   .pb-full {
   padding-bottom: 100%;
@@ -79,20 +78,13 @@
           <h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">
             {{$profile->username}}
           </h2>
-{{-- @if ($profile->id == Auth()->user()->id)
-     <a href="#" class="bg-blue-500 px-2 py-1 
-                        text-white font-semibold text-sm rounded-full  text-center 
-                        sm:inline-block block">
-                        <i class="fa-solid fa-check"></i>
-                      </a>
-@endif --}}
-       
+
         </div>
 
         <!-- post, following, followers list for medium screens -->
         <ul class="hidden md:flex space-x-8 mb-1">
           <li>
-            <span class="font-semibold">{{$post}}</span>
+            <span class="font-semibold">{{$post->count()}}</span>
             posts
           </li>
 
@@ -101,7 +93,18 @@
             Albums
           </li>
           <li>
-            <span class="font-semibold">{{$likes}}</span>
+            <span class="font-semibold">
+              @php
+              $totalLikes = 0;
+          @endphp
+          
+          @foreach ($post as $p)
+              @php
+                  $totalLikes += $p->postLikes->count();
+              @endphp
+          @endforeach
+          {{$totalLikes}}
+            </span>
             Likes
           </li>
         </ul>
@@ -260,7 +263,7 @@ alt="image">
               space-x-4 h-full">
               <span class="p-2">
                 <i class="fas fa-heart"></i>
-                0
+              {{$p->postLikes->count()}}
               </span>
               
               <span class="p-2">

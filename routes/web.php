@@ -40,6 +40,9 @@ Route::get('/search',[UserController::class,'search']);
 Route::get('/_search',[UserController::class,'_search']);
 Route::post('/like',[UserController::class,'_like']);
 Route::post('/unlike',[UserController::class,'_unlike']);
+Route::post('/save',[UserController::class,'_save']);
+Route::post('/unsave',[UserController::class,'_unsave']);
+Route::get('/saved-post',[UserController::class,'saved']);
 }); 
 
 Route::fallback(function(){

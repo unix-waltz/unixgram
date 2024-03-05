@@ -17,4 +17,7 @@ class PostModel extends Model
     public function postLikes(){
         return $this->hasMany(LikeModel::class,'postid','id');
     }
+    public function postSaves(){
+        return $this->hasMany(SavedModel::class,'postid','id');
+    }
 }

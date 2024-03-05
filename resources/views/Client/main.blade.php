@@ -57,6 +57,13 @@ placeholder="search"
                   </a>
                 </li>
                 <li>
+                  <a href="/saved-post" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+                    <div class="inline-flex items-center">
+Saved Post
+                    </div>
+                  </a>
+                </li>
+                <li>
                   <a href="/profile/setting" class="block px-10 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                     <div class="inline-flex items-center">
 Setting

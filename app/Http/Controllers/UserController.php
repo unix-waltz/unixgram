@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\LikeModel;
+use App\Models\SavedModel;
 use App\Models\User;
 use App\Models\AlbumModel;
 use App\Models\PostModel;
@@ -26,9 +27,8 @@ $page = 'true';
             'data' => $data,
             'input' => $page,
             'profile' => User::find(Auth()->user()->id),
-            'post' => PostModel::where('userid', Auth()->user()->id)->get()->count(),
+            'post' => PostModel::where('userid', Auth()->user()->id)->get(),
             'albums' => AlbumModel::where('userid', Auth()->user()->id)->get()->count(),
-            'likes' => 0,
         ]);
     }
     public function newpost(){
@@ -92,7 +92,7 @@ return redirect('/myprofile/@'.Auth()->user()->username.'?page=posts');
              'data' => $data,
              'input' => $page,
              'profile' => User::find($username->id),
-             'post' => PostModel::where('userid', $username->id)->get()->count(),
+             'post' => PostModel::where('userid', $username->id)->get(),
              'albums' => AlbumModel::where('userid', $username->id)->get()->count(),
              'likes' => 0,
          ]);
@@ -150,8 +150,28 @@ public function _unlike(Request $r){
 $model->delete();
     return redirect()->back();
     }
+    public function _save(Request $r){
+        $r = $r->validate([
+            'userid' => 'required',
+            'postid' => 'required'
+        ]);
+        SavedModel::create($r);
+        return redirect()->back();
+        }
+        public function _unsave(Request $r){
+        
+            $model = SavedModel::where('userid', $r->userid)
+            ->where('postid', $r->postid);
+        $model->delete();
+            return redirect()->back();
+            }
     public function _search(Request $r){
         return redirect('/search?s='.$r->search);
+    }
+    public function saved(){
+        return view('Client.savedpost',[
+            'data' => SavedModel::where('userid',(int)Auth()->user()->id)->get(),
+        ]);
     }
 }
 
