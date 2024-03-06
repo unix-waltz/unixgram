@@ -44,6 +44,8 @@ Route::post('/save',[UserController::class,'_save']);
 Route::post('/unsave',[UserController::class,'_unsave']);
 Route::get('/saved-post',[UserController::class,'saved']);
 Route::get('/delete/{uuid:uuid}',[UserController::class,'_delete']);
+Route::get('/edit/{uuid:uuid}',[UserController::class,'edit']);
+Route::post('/edit',[UserController::class,'_edit']);
 }); 
 
 Route::fallback(function(){

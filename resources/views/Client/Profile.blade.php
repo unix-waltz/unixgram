@@ -109,7 +109,7 @@
         </ul>
 
         <!-- user meta form medium screens -->
-        <div class="block md:hidden">
+        <div class="block">
           <h1 class="font-semibold">{{$profile->email}}</h1>
           <br>
           <p>{{$profile->bio}}</p>
