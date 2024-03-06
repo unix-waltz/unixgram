@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommentModel;
 use App\Models\LikeModel;
 use App\Models\SavedModel;
 use App\Models\User;
@@ -12,10 +13,12 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $r)
     {
+        $r = $r->input('view');
         return view('Client.index', [
             'data' => PostModel::all(),
+            'view' => $r,
         ]);
     }
     public function profile($username, Request $r)
@@ -106,9 +109,11 @@ class UserController extends Controller
             'likes' => 0,
         ]);
     }
-    public function detailposts(User $username)
+    public function detailposts(User $username,Request $r)
     {
+        $r = $r->input('view');
         return view('Client.detail', [
+            'view' => $r,
             'data' => PostModel::where('userid', $username->id)->get(),
         ]);
     }
@@ -216,6 +221,15 @@ class UserController extends Controller
         $model = PostModel::find($r->id);
         $model->update($v);
         return back();
+    }
+    public function _comment(Request $r){
+        $v = $r->validate([
+            'userid' => 'required',
+            'postid' => 'required',
+            'comment' => 'required|max:700'
+        ]);
+        CommentModel::create($v);
+        return redirect()->back();
     }
 }
 

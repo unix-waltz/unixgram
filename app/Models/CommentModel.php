@@ -10,4 +10,7 @@ class CommentModel extends Model
     use HasFactory;
     protected $table = 'comments';
     protected $guarded =['id'];
+    public function commentUser(){
+        return $this->belongsTo(User::class,'userid','id');
+    }
 }

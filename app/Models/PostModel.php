@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\LikeModel;
+use App\Models\SavedModel;
+use App\Models\CommentModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,5 +22,8 @@ class PostModel extends Model
     }
     public function postSaves(){
         return $this->hasMany(SavedModel::class,'postid','id');
+    }
+    public function postComments(){
+        return $this->hasMany(CommentModel::class,'postid','id');
     }
 }

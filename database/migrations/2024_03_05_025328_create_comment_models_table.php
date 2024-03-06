@@ -15,6 +15,7 @@ return new class extends Migration
             $t->id();
             $t->foreignId('userid')->constrained('users')->onDelete('cascade');
             $t->foreignId('postid')->constrained('post')->onDelete('cascade');
+            $t->text('comment');
             $t->timestamps();
         });
     }
